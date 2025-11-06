@@ -500,35 +500,35 @@ if (window.location.pathname == "/index.html"){
         });
     };
 
-  const applySwipeStyles = (deltaX) => {
+    const applySwipeStyles = (deltaX) => {
     const card = getActiveCard();
     if (!card) return;
     card.style.setProperty("--swipe-x", `${deltaX}px`);
     card.style.setProperty("--swipe-rotate", `${deltaX * 0.2}deg`);
     card.style.opacity = 1 - Math.min(Math.abs(deltaX) / 100, 1) * 0.75;
-  };
+    };
 
-  const handleStart = (clientX) => {
+    const handleStart = (clientX) => {
     if (isSwiping) return;
     isSwiping = true;
     startX = currentX = clientX;
     const card = getActiveCard();
     card && (card.style.transition = "none");
-  };
+    };
 
-  const handleMove = (clientX) => {
+    const handleMove = (clientX) => {
     if (!isSwiping) return;
     cancelAnimationFrame(animationFrameId);
     animationFrameId = requestAnimationFrame(() => {
-      currentX = clientX;
-      const deltaX = currentX - startX;
-      applySwipeStyles(deltaX);
+    currentX = clientX;
+    const deltaX = currentX - startX;
+    applySwipeStyles(deltaX);
 
-      if (Math.abs(deltaX) > 50) handleEnd();
+    if (Math.abs(deltaX) > 50) handleEnd();
     });
-  };
+    };
 
-  const handleEnd = () => {
+    const handleEnd = () => {
     if (!isSwiping) return;
     cancelAnimationFrame(animationFrameId);
 
@@ -538,9 +538,9 @@ if (window.location.pathname == "/index.html"){
     const card = getActiveCard();
 
     if (card) {
-      card.style.transition = `transform ${duration}ms ease, opacity ${duration}ms ease`;
+        card.style.transition = `transform ${duration}ms ease, opacity ${duration}ms ease`;
 
-      if (Math.abs(deltaX) > threshold) {
+        if (Math.abs(deltaX) > threshold) {
         const direction = Math.sign(deltaX);
 
         card.style.setProperty("--swipe-x", `${direction * 300}px`);
@@ -551,30 +551,30 @@ if (window.location.pathname == "/index.html"){
         }, duration * 0.5);
 
         setTimeout(() => {
-          cards = [...cards.slice(1), card];
-          updatePositions();
+            cards = [...cards.slice(1), card];
+            updatePositions();
         }, duration);
-      } else {
+        } else {
         applySwipeStyles(0);
-      }
+        }
     }
 
     isSwiping = false;
     startX = currentX = 0;
-  };
+    };
 
-  const addEventListeners = () => {
+    const addEventListeners = () => {
     cardStack?.addEventListener("pointerdown", ({ clientX }) =>
-      handleStart(clientX)
+        handleStart(clientX)
     );
     cardStack?.addEventListener("pointermove", ({ clientX }) =>
-      handleMove(clientX)
+        handleMove(clientX)
     );
     cardStack?.addEventListener("pointerup", handleEnd);
-  };
+    };
 
-  updatePositions();
-  addEventListeners();
+    updatePositions();
+    addEventListeners();
 });
 
 }
