@@ -149,7 +149,7 @@ let index = 0;
 const card_container = document.querySelector('#container_cards');
 const myDeckContainer = document.querySelector('#container_mydeck');
 
-if (window.location.pathname == "/market.html"){
+if (window.location.pathname.includes("/market.html")){
 
     function marketAffichage(index){
         card_container.innerHTML = "" ;
@@ -215,7 +215,7 @@ if (window.location.pathname == "/market.html"){
         }
     });
 }
-if (window.location.pathname == "/deck.html" || window.location.pathname == "/market.html") {
+if (window.location.pathname.includes("/deck.html") || window.location.pathname.includes("/market.html")) {
     const rarete = document.querySelectorAll('.filtre');
     function affichageRarete(index , container) {
         container.innerHTML = '';
@@ -417,8 +417,7 @@ function myDeckAffichage() {
         `;
     }
 }
-console.log(window.location.pathname);
-if (window.location.pathname == "/deck.html") {
+if (window.location.pathname.includes("/deck.html")) {
     window.addEventListener('DOMContentLoaded', () => {
         myDeckAffichage();
     });
@@ -430,7 +429,7 @@ if (window.location.pathname == "/deck.html") {
 // ------------------------- favourite -------------------------------
 const favouriteAffichage = document.getElementById('container_favorites');
 
-if(window.location.pathname == "/favorites.html"){
+if(window.location.pathname.includes("/favorites.html")){
     let favourites = JSON.parse(localStorage.getItem('favourites')) || [];
     if (favourites.length == 0){
         localStorage.removeItem('favourites');
@@ -467,7 +466,7 @@ if(window.location.pathname == "/favorites.html"){
     }
 }
 //-----------------home ---------------------
-if (window.location.pathname == "/index.html"){
+if (window.location.pathname.includes("/index.html")){
     document.addEventListener("DOMContentLoaded", () => {
     const cardStack = document.querySelector(".card-stack");
     let cards = [...document.querySelectorAll(".card")];
